@@ -1,11 +1,24 @@
 [
   {
-    "Code": "123",
+    "Code": "1",
     "Nombre": "Brayan",
-    "Direccion": "Mazana k casa 3",
+    "Direccion": "Manzana k casa 3",
     "Edad": 22,
-    "Quices": [],
-    "Trabajos": [],
-    "Parciales": []
+    "Quices": [
+      3.6,
+      4.5,
+      5.0,
+      3.9
+    ],
+    "Trabajos": [
+      5.0,
+      4.0,
+      4.2
+    ],
+    "Parciales": [
+      4.0,
+      4.2,
+      5.0
+    ]
   }
 ]
