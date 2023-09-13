@@ -34,16 +34,17 @@ namespace Boletin.Entities
         public string Nombre { get => nombre; set => nombre = value; }
         public string Direccion { get => direccion; set => direccion = value; }
         public byte Edad { get => edad; set => edad = value; }
+
         public void InfoEstudiante(List<Estudiante> estudiantes)
         {
             Estudiante estudiante = new Estudiante();
-            Console.Write("Codigo: ");
+            Console.Write("Ingrese el Codigo del Estudiante: ");
             estudiante.Code = Console.ReadLine();
-            Console.Write("Nombre: ");
+            Console.Write("Ingrese el Nombre del Estudiante: ");
             estudiante.Nombre = Console.ReadLine();
-            Console.Write("Direccion: ");
+            Console.Write("Ingrese la Direccion del Estudiante: ");
             estudiante.Direccion = Console.ReadLine();
-            Console.Write("Edad: ");
+            Console.Write("Ingrese la Edad del Estudiante: ");
             estudiante.Edad = Convert.ToByte(Console.ReadLine());
             estudiante.Quices = new List<float>();
             estudiante.Trabajos = new List<float>();
@@ -53,22 +54,25 @@ namespace Boletin.Entities
 
         public void RegistroNota(List<Estudiante> estudiantes, int opcion)
         {
+            Console.Clear();
             Console.WriteLine("Ingrese el codigo del estudiante: ");
             string studenCode = Console.ReadLine();
             // Estudiante alumno =  new Estudiante();
             Estudiante alumno = estudiantes.FirstOrDefault(x => x.Code.Equals(studenCode));
-            Console.WriteLine("Por favor ingrese la nota: ");
+            Console.WriteLine("Por favor ingrese las notas: ");
             switch (opcion)
             {
                 case 1:
                     //Por favor me cuente la cantidad de Quices ✨, como el contador inicia en 0 le sumamos 1.
-                    Console.WriteLine("Quiz Nro: {0}", (alumno.Quices.Count + 1));
+                    Console.Write("Quiz Nro{0}: ", (alumno.Quices.Count + 1));
                     alumno.Quices.Add(float.Parse(Console.ReadLine()));
                     break;
                 case 2:
+                    Console.Write("Trabajo Nro{0}: ", (alumno.Trabajos.Count + 1));
                     alumno.Trabajos.Add(float.Parse(Console.ReadLine()));
                     break;
                 case 3:
+                    Console.Write("Parcial Nro{0}: ", (alumno.Parciales.Count + 1));
                     alumno.Parciales.Add(float.Parse(Console.ReadLine()));
                     break;
                 default:
@@ -79,57 +83,91 @@ namespace Boletin.Entities
             int idx = estudiantes.FindIndex(p => p.Code.Equals(studenCode));
             estudiantes[idx] = alumno;
         }
+
         public void RemoveItem(List<Estudiante> estudiantes)
         {
             Console.Clear();
-            // Solicita al usuario que ingrese el código del estudiante a eliminar
             Console.WriteLine("Ingrese el código del estudiante a eliminar: ");
             string id = Console.ReadLine();
 
-            // Busca el primer estudiante cuyo código coincide con el código ingresado
-            Estudiante studenToRemove = estudiantes.FirstOrDefault(st => (st.Code ?? string.Empty).Equals(id)) ?? new Estudiante();
-
-            // Verifica si se encontró un estudiante con el código ingresado
-            if (studenToRemove != null)
+            // Validación de entrada: Comprueba si el código ingresado no está vacío
+            if (string.IsNullOrWhiteSpace(id))
             {
-                // Si se encontró un estudiante, lo elimina de la lista de estudiantes
-                estudiantes.Remove(studenToRemove);
+                Console.WriteLine("Código ingresado no válido.");
+                Console.ReadLine();
+                return;
+            }
+
+            // Busca al estudiante en la lista por código
+            Estudiante studentToRemove = FindStudentById(estudiantes, id);
+
+            if (studentToRemove != null)
+            {
+                estudiantes.Remove(studentToRemove);
                 MisFunciones.SaveData(estudiantes);
+                Console.Write("Estudiante eliminado correctamente. Press Enter to continue...");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("No se encontró ningún estudiante con el código ingresado.");
+                Console.ReadKey();
             }
         }
 
-        // public void RemoveItem(List<Estudiante> estudiantes)
-        // {
-        //     Console.WriteLine("Ingrese el código del estudiante a eliminar: ");
-        //     string id = Console.ReadLine();
+        // Función auxiliar para buscar estudiantes por código
+        private Estudiante FindStudentById(List<Estudiante> estudiantes, string id)
+        {
+            return estudiantes.FirstOrDefault(student => (student.Code ?? string.Empty).Equals(id));
+        }
 
-        //     // Validación de entrada: Comprueba si el código ingresado no está vacío
-        //     if (string.IsNullOrWhiteSpace(id))
-        //     {
-        //         Console.WriteLine("Código ingresado no válido.");
-        //         return;
-        //     }
+        public void EditEstudent(List<Estudiante> estudiantes)
+        {
+            Console.Clear();
+            Console.WriteLine("Ingrese el código del estudiante a editar: ");
+            string id = Console.ReadLine();
 
-        //     // Busca al estudiante en la lista por código
-        //     Estudiante studentToRemove = FindStudentById(estudiantes, id);
+            // Validación de entrada: Comprueba si el código ingresado no está vacío
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                Console.WriteLine("Código ingresado no válido.");
+                Console.ReadLine();
+                return;
+            }
 
-        //     if (studentToRemove != null)
-        //     {
-        //         estudiantes.Remove(studentToRemove);
-        //         Console.WriteLine("Estudiante eliminado correctamente.");
-        //     }
-        //     else
-        //     {
-        //         Console.WriteLine("No se encontró ningún estudiante con el código ingresado.");
-        //     }
-        // }
+            // Busca al estudiante en la lista por código
+            Estudiante studentToEdit = estudiantes.FirstOrDefault(x => x.Code.Equals(id));
 
-        // // Función auxiliar para buscar estudiantes por código
-        // private Estudiante FindStudentById(List<Estudiante> estudiantes, string id)
-        // {
-        //     return estudiantes.FirstOrDefault(student => (student.Code ?? string.Empty).Equals(id));
-        // }
+            if (studentToEdit != null)
+            {
+                Console.Clear();
+                Console.Write("Ingrese el nuevo Código del Estudiante: ");
+                studentToEdit.Code = Console.ReadLine();
+                Console.Write("Ingrese el nuevo Nombre del Estudiante: ");
+                studentToEdit.Nombre = Console.ReadLine();
+                Console.Write("Ingrese la nueva Dirección del Estudiante: ");
+                studentToEdit.Direccion = Console.ReadLine();
+                Console.Write("Ingrese la nueva edad del Estudiante: ");
+                byte nuevaEdad;
+                if (byte.TryParse(Console.ReadLine(), out nuevaEdad))
+                {
+                    studentToEdit.Edad = nuevaEdad;
+                }
+                else
+                {
+                    Console.WriteLine("Edad ingresada no válida. No se realizaron cambios en la edad.");
+                }
 
+                MisFunciones.SaveData(estudiantes);
 
+                Console.WriteLine("Estudiante editado correctamente. Presione Enter para continuar...");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("No se encontró ningún estudiante con el código ingresado.");
+                Console.ReadLine();
+            }
+        }
     }
 }

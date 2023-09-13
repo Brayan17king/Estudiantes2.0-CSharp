@@ -7,9 +7,9 @@ namespace Boletin.Entities
 {
     public class Boletin
     {
-        List<float> quices = new List<float>();
-        List<float> trabajos = new List<float>();
-        List<float> parciales = new List<float>();
+        List<float> quices = new List<float>(){0,0,0,0};
+        List<float> trabajos = new List<float>(){0,0};
+        List<float> parciales = new List<float>(){0,0,0};
 
         public Boletin()
         {
