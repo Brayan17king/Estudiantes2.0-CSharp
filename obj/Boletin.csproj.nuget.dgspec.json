@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\xbray\\Downloads\\Boletin\\Boletin.csproj": {}
+    "C:\\Users\\APM02-53\\Desktop\\cSharp\\Estudiantes2.0-CSharp\\Boletin.csproj": {}
   },
   "projects": {
-    "C:\\Users\\xbray\\Downloads\\Boletin\\Boletin.csproj": {
+    "C:\\Users\\APM02-53\\Desktop\\cSharp\\Estudiantes2.0-CSharp\\Boletin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\xbray\\Downloads\\Boletin\\Boletin.csproj",
+        "projectUniqueName": "C:\\Users\\APM02-53\\Desktop\\cSharp\\Estudiantes2.0-CSharp\\Boletin.csproj",
         "projectName": "Boletin",
-        "projectPath": "C:\\Users\\xbray\\Downloads\\Boletin\\Boletin.csproj",
-        "packagesPath": "C:\\Users\\xbray\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\xbray\\Downloads\\Boletin\\obj\\",
+        "projectPath": "C:\\Users\\APM02-53\\Desktop\\cSharp\\Estudiantes2.0-CSharp\\Boletin.csproj",
+        "packagesPath": "C:\\Users\\APM02-53\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\APM02-53\\Desktop\\cSharp\\Estudiantes2.0-CSharp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\xbray\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\APM02-53\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
